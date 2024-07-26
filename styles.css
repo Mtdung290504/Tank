@@ -1,0 +1,168 @@
+*{box-sizing: unset; margin: 0; padding: 0;}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+}
+
+#container {
+    position: relative;
+    width: 80%;
+    height: 90dvh;
+    background-color: #666;
+    overflow: hidden;
+}
+
+.tank {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    /* background-color: #333; */
+    z-index: 1;
+
+    background-image: url('./Imgs/Tank1/body.png');
+    background-size: cover;
+    background-position: center;
+    transform-origin: center;
+    border-radius: 50%;
+    transition: border-width .3s box-shadow .3s;
+    border: 0px double rgb(128, 0, 220);
+}
+
+.tank.disperse {
+    /* border: 7px double rgb(128, 0, 220); */
+    border-width: 8px;
+    box-shadow: 0 0 10px rgb(81, 0, 139), 0 0 15px rgb(128, 0, 220);    
+}
+
+.tank.space {
+    filter: drop-shadow(0 0 5px rgb(179, 0, 161));
+}
+
+.tank-head {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    /* border-radius: 50%; */
+    /* background-color: gold; */
+    z-index: 3;
+    transform-origin: center;
+
+    background-image: url('./Imgs/Tank1/head.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.tank-head::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 25px;
+    height: 35px;
+    background-color: gold;
+
+    display: none;
+}
+
+.bullet {
+    position: absolute;
+    width: 115px;
+    height: 40px;
+    /* background-color: rgb(128, 0, 220); */
+    z-index: 2;
+    transform-origin: left;
+    /* box-shadow: 0 0 6px rgb(128, 0, 220); */
+    /* border-radius: 10px; */
+
+    background-image: url('./Imgs/Tank1/bullet-default.png');
+    background-size: cover;
+    background-position: center;
+    filter: drop-shadow(0 0 10px rgb(171, 53, 255));
+}
+.bullet.special {
+    filter: drop-shadow(0 0 10px rgb(171, 53, 255)) drop-shadow(0 0 5px rgb(179, 0, 161));
+}
+
+/* .collision-effect {
+    position: absolute;
+    width: 6.5px;
+    aspect-ratio: 1;
+    border: 1px solid gold;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: collisionEffect 0.3s forwards;
+    z-index: 1;
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+.collision-effect {
+    position: absolute;
+    width: 8px;
+    aspect-ratio: 1;
+    pointer-events: none;
+    animation: collisionEffect 0.25s forwards;
+    z-index: 1;
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url('./Imgs/Tank1/collision2.png');
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 50%;
+    overflow: hidden;
+    /* box-shadow: 0 0 0 0 #000 inset; */
+    filter: drop-shadow(0 0 25px rgb(177, 77, 249));
+}
+.collision-effect.special {
+    filter: drop-shadow(0 0 10px rgb(171, 53, 255)) drop-shadow(0 0 15px rgb(179, 0, 161));
+}
+
+@keyframes collisionEffect {
+    0% {
+        transform: scale(0);
+        opacity: .5;
+    }
+    50% {
+        transform: scale(7);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(9);
+        opacity: 0;
+    }
+}
+
+@keyframes hit {
+    0% {
+        border: 0px solid white;
+    }
+    100% {
+        border: 2px solid white;
+    }
+}
+
+#obstacle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    top: 250px;
+    left: 550px;
+}
